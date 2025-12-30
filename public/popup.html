@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>同步对冲点击器</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 350px;
+      min-height: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .status-item:last-child {
+      border-bottom: none;
+    }
+
+    .platform-name {
+      font-weight: 500;
+    }
+
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-ready {
+      background: #10b981;
+    }
+
+    .status-not-ready {
+      background: #ef4444;
+    }
+
+    .instructions {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .instructions ol {
+      margin-left: 18px;
+      margin-top: 8px;
+    }
+
+    .instructions li {
+      margin-bottom: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    #executeBtn {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+    }
+
+    #executeBtn:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #resetBtn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    .warning {
+      background: rgba(245, 87, 108, 0.2);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-top: 10px;
+      border-left: 3px solid #f5576c;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 15px;
+    }
+
+    #feedback {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: white;
+      color: #667eea;
+      padding: 20px 30px;
+      border-radius: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    #feedback.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 同步对冲点击器</h1>
+
+  <div class="instructions">
+    <strong>使用步骤：</strong>
+    <ol>
+      <li>在两个平台手动设置好对冲参数</li>
+      <li>点击页面右上角的悬浮按钮选择提交按钮</li>
+      <li>回到此处点击"执行同步点击"</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📊 平台状态</div>
+    <div class="status-item">
+      <span class="platform-name">Lighter</span>
+      <span id="lighterStatus" class="status-badge status-not-ready">未就绪</span>
+    </div>
+    <div class="status-item">
+      <span class="platform-name">Variational</span>
+      <span id="variationalStatus" class="status-badge status-not-ready">未就绪</span>
+    </div>
+  </div>
+
+  <button id="executeBtn" disabled>
+    ⚡ 执行同步点击
+  </button>
+
+  <button id="resetBtn">
+    🔄 重新选择按钮
+  </button>
+
+  <div class="warning">
+    ⚠️ 请确保已在两个平台手动设置好交易参数（方向、数量等），本工具只负责同步点击！
+  </div>
+
+  <div class="footer">
+    同步精度目标: < 5ms
+  </div>
+
+  <div id="feedback"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Sync Clicker",
+  "version": "1.0.0",
+  "description": "Sync clicking for trading platforms",
+  "permissions": ["storage", "tabs", "scripting"],
+  "host_permissions": [
+    "https://app.lighter.xyz/*",
+    "https://*.lighter.xyz/*",
+    "https://variational.io/*",
+    "https://*.variational.io/*",
+    "https://omni.variational.io/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://app.lighter.xyz/*", "https://*.lighter.xyz/*"],
+      "js": ["src/content-lighter.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://variational.io/*",
+        "https://*.variational.io/*",
+        "https://omni.variational.io/*"
+      ],
+      "js": ["src/content-variational.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "public/popup.html",
+    "default_title": "Sync Clicker"
+  }
+}
