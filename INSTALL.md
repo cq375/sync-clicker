@@ -6,7 +6,7 @@
 2. 访问 `chrome://extensions/`
 3. 打开右上角的"开发者模式"开关
 4. 点击"加载已解压的扩展程序"
-5. 选择 `/Users/0xprint/Desktop/simple-sync-clicker` 文件夹
+5. 选择 `/Desktop/simple-sync-clicker` 文件夹
 6. 扩展加载成功！
 
 ## 2. 使用方法
