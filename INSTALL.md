@@ -13,7 +13,7 @@
 
 ### 第一步：打开两个交易平台
 
-- Lighter: https://app.lighter.xyz
+- Lighter: app.lighter.xyz/?referral=316477MW
 - Variational: https://omni.variational.io
 
 ### 第二步：手动设置交易参数
